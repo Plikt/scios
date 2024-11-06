@@ -29,11 +29,11 @@ export default function Home() {
 					{/* Hero Content */}
 					<div className="flex-grow flex items-center z-10">
 						<div className="w-full md:w-2/3 px-6 md:px-16">
-							<h1>We create infrastructure</h1>
+							<h1>We advance infrastructure</h1>
 							<h2 className="font-openSans font-medium text-[28px]">
-								We support collaborative, open source technological solutions to
-								streamline the research process and foster open science
-								practices
+								We coordinate people and organizations deeply 
+								invested in building sustainable infrastructure, coordination layers, 
+								and operating systems for the scientific endeavor. 
 							</h2>
 						</div>
 					</div>
@@ -57,8 +57,8 @@ export default function Home() {
 							chain that is open, efficient, and accessible. We believe that the
 							convergence of culture and technology is critical to achieve this
 							vision. SciOS maintains a collaborative environment for academics,
-							researchers, technologists, innovators, funders, policy makers,
-							institutions, corporations, and the public. We achieve this by
+							researchers, technologists, innovators, funders, decision makers,
+							institutions, corporations, and the public.
 						</p>
 					</div>
 
@@ -66,7 +66,7 @@ export default function Home() {
 						title={"Connect"}
 						icon="connect.svg"
 						text={
-							"Network of researchers and technologists who want to and can create technology for the Open Science community."
+							"Our network of researchers, technologists, leaders, decision makers, builders, and thinkers are passionately dedicated to rapid advancements in data, compute, recognition, provenance, reproducibility, AI, collaboration, and social infrastructure. We don't desire a future of open science. We're building one."
 						}
 						imageSrc={"connect.png"}
 						ctaText="Join our network"
@@ -74,7 +74,7 @@ export default function Home() {
 					<Product
 						title="Build"
 						icon="build.svg"
-						text="Our workshops lead to clear outputs. Every workshop, working group, and hackathon is grounded in the results the community needs instead of declarations on what we already know we should do."
+						text="Our workshops lead to clear outputs. Every workshop, working group, and hackathon is grounded in the results the community needs. No reports. No research questions. No requests for signature. Systems, structures, and code."
 						imageSrc="build.png"
 						hyperlink="#projects"
 						hyperlinkText="See supported projects"
@@ -83,7 +83,7 @@ export default function Home() {
 					<Product
 						title="Share"
 						icon="share.svg"
-						text="All technology we facilitate is open source. Our workshop outputs are synthesized into resources accessible and understandable by everyone. We then shared directly to ensure that the most engaged and impacted individuals know."
+						text="Our workshop outputs are synthesized into resources accessible and understandable by everyone. All technology we facilitate is open source. We proactively share each output across our network so the most engaged and impacted individuals stay on the cutting edge."
 						imageSrc="share.png"
 						hyperlink="#"
 						hyperlinkText="Subscribe to our newsletter"

@@ -1,5 +1,50 @@
 import { google } from "googleapis";
 
+function parseFormattedText(text: string) {
+	if (!text) return "";
+	
+	return text
+		// Headers
+		.replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold mt-4 mb-2">$1</h3>')
+		.replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold mt-6 mb-3">$1</h2>')
+		.replace(/^# (.*$)/gm, '<h1 class="text-3xl font-bold mt-8 mb-4">$1</h1>')
+		
+		// Text formatting
+		.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>') // Bold: **text**
+		.replace(/\*(.*?)\*/g, '<em class="italic">$1</em>') // Italic: *text*
+		.replace(/~~(.*?)~~/g, '<del class="line-through">$1</del>') // Strikethrough: ~~text~~
+		.replace(/`(.*?)`/g, '<code class="bg-muted px-1.5 py-0.5 rounded text-sm">$1</code>') // Inline code: `text`
+		
+		// Links
+		.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" class="text-primary hover:underline">$1</a>') // Links: [text](url)
+		
+		// Lists
+		.replace(/^\s*[-*]\s+(.*$)/gm, '<li class="ml-4">$1</li>') // Unordered list items
+		.replace(/^\s*\d+\.\s+(.*$)/gm, '<li class="ml-4">$1</li>') // Ordered list items
+		.replace(/(<li.*<\/li>)\n/g, '<ul class="list-disc ml-6 my-2">$1</ul>') // Wrap unordered lists
+		.replace(/(<li.*<\/li>)\n/g, '<ol class="list-decimal ml-6 my-2">$1</ol>') // Wrap ordered lists
+		
+		// Blockquotes
+		.replace(/^\s*>\s*(.*$)/gm, '<blockquote class="border-l-2 border-primary pl-4 italic my-4">$1</blockquote>')
+		
+		// Code blocks
+		.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre class="bg-muted p-4 rounded-lg my-4"><code class="text-sm">$2</code></pre>')
+		
+		// Tables
+		.replace(/\|(.+)\|/g, '<tr><td class="border border-border p-2">$1</td></tr>')
+		.replace(/^\|(.+)\|$/gm, '<table class="border-collapse my-4"><tbody>$1</tbody></table>')
+		
+		// Horizontal rule
+		.replace(/^---$/gm, '<hr class="my-8 border-border" />')
+		
+		// Line breaks
+		.replace(/\n/g, '<br />')
+		
+		// Paragraphs
+		.replace(/<br \/><br \/>/g, '</p><p class="my-2">')
+		.replace(/^(.+)$/gm, '<p class="my-2">$1</p>');
+}
+
 export async function GET() {
 	try {
 		const auth = await google.auth.getClient({
@@ -41,6 +86,9 @@ export async function GET() {
 				location: value[3] ?? "",
 				eventLink: value[4] ?? "",
 				description: value[5] ?? "",
+				description: parseFormattedText(value[5]) ?? "",
+
+
 				oldResources,
 				agenda,
 				isOld: value[8],

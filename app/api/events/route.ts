@@ -3,7 +3,7 @@ import { google } from "googleapis";
 function parseFormattedText(text: string) {
 	if (!text) return "";
 	
-	return text
+	let parsed = text
 		// Headers
 		.replace(/^### (.*$)/gm, '<h3 class="text-xl font-bold mt-4 mb-2">$1</h3>')
 		.replace(/^## (.*$)/gm, '<h2 class="text-2xl font-bold mt-6 mb-3">$1</h2>')
@@ -21,9 +21,9 @@ function parseFormattedText(text: string) {
 		// Lists
 		.replace(/^\s*[-*]\s+(.*$)/gm, '<li class="ml-4">$1</li>') // Unordered list items
 		.replace(/^\s*\d+\.\s+(.*$)/gm, '<li class="ml-4">$1</li>') // Ordered list items
-		.replace(/(<li.*<\/li>)\n/g, '<ul class="list-disc ml-6 my-2">$1</ul>') // Wrap unordered lists
+		.replace(/(<li class="ml-4">.*<\/li>)/gm, '<ul class="list-disc ml-6 my-2">$1</ul>') // Wrap unordered lists
 		.replace(/(<li.*<\/li>)\n/g, '<ol class="list-decimal ml-6 my-2">$1</ol>') // Wrap ordered lists
-		
+
 		// Blockquotes
 		.replace(/^\s*>\s*(.*$)/gm, '<blockquote class="border-l-2 border-primary pl-4 italic my-4">$1</blockquote>')
 		
@@ -42,7 +42,11 @@ function parseFormattedText(text: string) {
 		
 		// Paragraphs
 		.replace(/<br \/><br \/>/g, '</p><p class="my-2">')
-		.replace(/^(.+)$/gm, '<p class="my-2">$1</p>');
+
+	parsed = parsed.replace(/^(?!<.*>)(.+?)$/gm, '<p class="my-2">$1</p>');
+
+	return parsed;
+
 }
 
 export async function GET() {

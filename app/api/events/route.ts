@@ -85,10 +85,7 @@ export async function GET() {
 				hosts: value[2].split(",") ?? [],
 				location: value[3] ?? "",
 				eventLink: value[4] ?? "",
-				description: value[5] ?? "",
 				description: parseFormattedText(value[5]) ?? "",
-
-
 				oldResources,
 				agenda,
 				isOld: value[8],

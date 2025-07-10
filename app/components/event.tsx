@@ -124,7 +124,7 @@ const EventCard: React.FC<EventProps> = ({
 			</div>
 			{expanded && (
 				<>
-					<p>{description}</p>
+					<div dangerouslySetInnerHTML={{ __html: description }} className="prose prose-sm max-w-none" />
 					{oldResources && oldResources.length > 0 ? (
 						<div className="flex gap-4">
 							{oldResources.map((resouce, index) => {
